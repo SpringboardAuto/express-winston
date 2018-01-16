@@ -262,7 +262,7 @@ exports.logger = function logger(options) {
                   || _.includes(req.headers['content-type'], 'text/xml');
     
                 if (req.headers && isContentTypeXml) {
-                  filteredBody = req.body;
+                  filteredBody = logData.req.body;
                 } else if (blacklist.length > 0 && bodyWhitelist.length === 0) {
                   var whitelist = _.difference(Object.keys(req.body), blacklist);
                   filteredBody = filterObject(req.body, whitelist, options.requestFilter);

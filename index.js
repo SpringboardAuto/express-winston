@@ -257,13 +257,8 @@ exports.logger = function logger(options) {
 
               var filteredBody = null;
 
-              if ( req.body !== undefined ) {
-                const isContentTypeXml = _.includes(req.headers['content-type'], 'application/xml') 
-                  || _.includes(req.headers['content-type'], 'text/xml');
-    
-                if (req.headers && isContentTypeXml) {
-                  filteredBody = req.body;
-                } else if (blacklist.length > 0 && bodyWhitelist.length === 0) {
+              if ( req.body !== undefined ) {    
+                if (blacklist.length > 0 && bodyWhitelist.length === 0) {
                   var whitelist = _.difference(Object.keys(req.body), blacklist);
                   filteredBody = filterObject(req.body, whitelist, options.requestFilter);
                 } else if (
